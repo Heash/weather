@@ -1,0 +1,92 @@
+.clearfix() {
+	zoom: 1;
+	&:after {content: ''; display: table; clear: both;}
+}
+
+.pull-left {
+	float: left;
+}
+
+.pull-right {
+	float: right;
+}
+
+.transition(@duration: .2s, @target: all, @style: ease-out) {
+	transition: @target @duration @style;
+	-o-transition: @target @duration @style;
+	-moz-transition: @target @duration @style;
+	-webkit-transition: @target @duration @style;
+	-khtml-transition: @target @duration @style;
+}
+
+.box-sizing(@value: border-box) {
+	box-sizing: @value;
+	-moz-box-sizing: @value;
+	-webkit-box-sizing: @value;
+}
+
+.gradient(@color1, @color2, @position: top) {
+	background-color: (@color1+@color2)/2;
+	background-image: linear-gradient(@position, @color1 0, @color2 100%);
+	background-image: -o-linear-gradient(@position, @color1 0, @color2 100%);
+	background-image: -moz-linear-gradient(@position, @color1 0, @color2 100%);
+	background-image: -webkit-linear-gradient(@position, @color1 0, @color2 100%);
+	background-image: -ms-linear-gradient(@position, @color1 0, @color2 100%);
+}
+
+.vertical-align(@position: middle) {
+	display: table;
+	font-size: 0;
+	> * {
+		display: inline-block;
+		font-size: 1rem;
+	}
+	&:before {
+		content: '';
+		height: 100%;
+		display: inline-block;
+	}
+	> *, &:before {
+		vertical-align: @position;
+	}
+}
+
+.transform(@arguments) {
+	-webkit-transform: @arguments;
+	-moz-transform: @arguments;
+	-ms-transform: @arguments;
+	-o-transform: @arguments;
+	transform: @arguments;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+// for media queries
+
+.md(@rules) {
+	@media (min-width: 992px) {
+		@rules();
+	}
+}
+
+.sm(@rules) {
+	@media (min-width: 768px) {
+		@rules();
+	}
+}
+
+.lg(@rules) {
+	@media (min-width: 1200px) {
+		@rules();
+	}
+}

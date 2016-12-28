@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Weather</title>
+	<link rel="stylesheet" href="public/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="public/css/style.css">
+
+	<script src="public/bower_components/angular/angular.min.js"></script>
+	<script src="public/bower_components/angular-openweathermap-api-factory/dist/angular-openweathermap-api-factory.min.js"></script>
+	<script src="public/bower_components/angular-route/angular-route.min.js"></script>
+	
+	<script src="public/js/app.js"></script>
+	<script src="public/js/controllers/weather.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+<body ng-app="weatherApp">
+	<div class="container">
+		<div class="weather-block" ng-controller="WeatherCtrl">
+			<div class="row"><p></p>
+				<div class="col-xs-6">
+					<div class="weather-block weather-block-main" ng-if="weather.local">
+						<img ng-if="weather.local.icon" ng-src="{{'http://openweathermap.org/img/w/' + weather.local.icon + '.png'}}" alt="" class="sr">
+						<span class="name" >{{ weather.local.city }}</span>
+						<span class="temperature" ng-bind="weather.local.temp + '&deg;C'"></span>
+						<span class="description">{{ weather.local.description }}</span>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<!-- locations -->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
