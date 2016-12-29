@@ -18,6 +18,7 @@
     "angular-route": "^1.6.1",
     "angular": "^1.6.1",
     "bootstrap": "^3.3.7",
-    "angular-openweathermap-api-factory": "^0.6.0"
+    "angular-openweathermap-api-factory": "^0.6.0",
+    "vsGoogleAutocomplete": "vs-google-autocomplete#^0.5.0"
   }
 }

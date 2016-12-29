@@ -1,35 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="weatherApp">
 <head>
 	<meta charset="UTF-8">
 	<title>Weather</title>
+
+	<!-- stles -->
 	<link rel="stylesheet" href="public/bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="public/css/style.css">
 
+	<!-- angular & dependencies -->
 	<script src="public/bower_components/angular/angular.min.js"></script>
 	<script src="public/bower_components/angular-openweathermap-api-factory/dist/angular-openweathermap-api-factory.min.js"></script>
 	<script src="public/bower_components/angular-route/angular-route.min.js"></script>
+	<script src="public/bower_components/vsGoogleAutocomplete/dist/vs-google-autocomplete.min.js"></script>
 	
 	<script src="public/js/app.js"></script>
 	<script src="public/js/controllers/weather.js"></script>
+	<script src="public/js/controllers/locations.js"></script>
+	<script src="public/js/services/geoStorage.js"></script>
+	<script src="public/js/services/weather.js"></script>
+
+	<!-- libraries -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUaygeOqHdwq9x_E5LXpGZfCNY-Gz4qlY&libraries=places"></script>
 </head>
-<body ng-app="weatherApp">
+<body ng-controller="WeatherCtrl">
 	<div class="container">
-		<div class="weather-block" ng-controller="WeatherCtrl">
-			<div class="row"><p></p>
-				<div class="col-xs-6">
-					<div class="weather-block weather-block-main" ng-if="weather.local">
-						<img ng-if="weather.local.icon" ng-src="{{'http://openweathermap.org/img/w/' + weather.local.icon + '.png'}}" alt="" class="sr">
-						<span class="name" >{{ weather.local.city }}</span>
-						<span class="temperature" ng-bind="weather.local.temp + '&deg;C'"></span>
-						<span class="description">{{ weather.local.description }}</span>
+		<div class="block-weather">
+			<div class="row">
+				<!-- left block -->
+				<div class="col-sm-6">
+					<div class="block-weather block-weather-main" ng-if="weather">
+						<div class="block-weather-item">
+							<span class="block-weather-item name">{{ weather.city }}</span>
+						</div>
+						<div class="block-weather-item">
+							<img class="icon" ng-if="weather.icon" ng-src="{{'http://openweathermap.org/img/w/' + weather.icon + '.png'}}" alt="">
+							<span class="block-weather-item description">{{ weather.description }}</span>
+						</div>
+						<div class="block-weather-item">
+							<span class="block-weather-item temperature" ng-bind="weather.temp + '&deg;C'"></span>
+						</div>
 					</div>
 				</div>
-				<div class="col-xs-6">
-					<!-- locations -->
+				<!-- right block -->
+				<div class="col-sm-6" ng-controller="LocationsCtrl">
+					<div class="block-locations">
+						<!-- items list -->
+						<div class="list-group">
+							<a href="#" class="list-group-item" ng-repeat="location in locations track by $index" ng-click="getWeather(location.coordinates)">
+							<span class="badge" ng-click="removeLocation($index)">&times;</span>
+								{{ location.name }}
+							</a>
+						</div>
+						<!-- form with autocomplete -->
+						<form ng-submit="addLocation()">
+							<div class="row">
+								<div class="col-xs-9">
+									<div class="form-group">
+										<input class="form-control" name="address" type="text"
+											ng-model="address.name"
+											vs-google-autocomplete
+											vs-latitude="address.components.location.lat"
+											vs-longitude="address.components.location.long">
+									</div>
+								</div>
+								<div class="col-xs-3">
+									<button type="submit" class="btn btn-default btn-block">Add city</button>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>

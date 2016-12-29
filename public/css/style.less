@@ -1,2 +1,28 @@
 @import url(./util/mixins.import.less);
 @import url(./util/variables.import.less);
+
+body {
+	color: @primaryTextColor;
+}
+
+.block-weather {
+	&.block-weather-main {
+		background: @primaryColor;
+		color: @textPrimaryColor;
+		text-align: center;
+		padding: @indent;
+		.block-weather-item {
+			display: block;
+		}
+		.temperature {
+			margin-top: @indent;
+			font-size: 2em;
+		}
+	}
+}
+
+.block-locations {
+	color: @textPrimaryColor;
+	background: @accentColor;
+	padding: @indent;
+}
